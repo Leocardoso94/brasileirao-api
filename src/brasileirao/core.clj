@@ -30,13 +30,11 @@
      :goal-difference (get-stat-by-index 7)
      :exploitation (get-stat-by-index 8)}))
 
-(defn get-table  []
-  (let [dom (get-dom "https://globoesporte.globo.com/futebol/brasileirao-serie-a/")
+(defn get-table  [tournament]
+  (let [dom (get-dom (str "https://globoesporte.globo.com/futebol/" tournament))
         teams (map get-team  (html/select dom [:table.tabela-times :tbody :tr]))]
     (map-indexed (fn [index item]
                    {:team (nth teams index)
-                    :stats (get-stats item  [:td])}) (html/select dom [:table.tabela-pontos :tbody :tr]))))
-
-(defn -main
-  []
-  (get-table))
+                    :position (inc index)
+                    :stats (get-stats item  [:td])})
+                 (html/select dom [:table.tabela-pontos :tbody :tr]))))
