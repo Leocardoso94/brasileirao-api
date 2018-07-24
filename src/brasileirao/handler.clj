@@ -7,7 +7,7 @@
             [brasileirao.core :refer [get-table]]))
 
 (defn endpoints []
-  (let [uri "http://localhost:3000"
+  (let [uri "https://campeonato-brasileiro-api.herokuapp.com"
         generate-uri #(str uri %)]
     {:brasileirao-serie-a (generate-uri "/table/brasileirao-serie-a")
      :brasileirao-serie-b (generate-uri "/table/brasileirao-serie-b")}))
@@ -15,7 +15,6 @@
 
 (defroutes app-routes
   (GET "/" [a]
-    (println a)
     (response  (endpoints)))
   (GET "/table/:tournament" [tournament] (get-table tournament))
   (route/not-found "Not Found"))

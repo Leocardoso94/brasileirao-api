@@ -7,7 +7,7 @@
   (testing "main route"
     (let [response (app (mock/request :get "/"))]
       (is (= (:status response) 200))
-      (is (= (:body response) "{\"brasileirao-serie-a\":\"http://localhost:3000/table/brasileirao-serie-a\",\"brasileirao-serie-b\":\"http://localhost:3000/table/brasileirao-serie-b\"}"))))
+      (is (= (:body response) "{\"brasileirao-serie-a\":\"https://campeonato-brasileiro-api.herokuapp.com/table/brasileirao-serie-a\",\"brasileirao-serie-b\":\"https://campeonato-brasileiro-api.herokuapp.com/table/brasileirao-serie-b\"}" ))))
 
   (testing "not-found route"
     (let [response (app (mock/request :get "/invalid"))]
