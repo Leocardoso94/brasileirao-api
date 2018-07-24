@@ -7,4 +7,8 @@
 
 (deftest correct-goals-difference
   (let [stats (:stats (first  (get-table "brasileirao-serie-b")))]
-  (is (= (Integer/parseInt (:goal-difference stats)) (- (Integer/parseInt (:goals-for stats)) (Integer/parseInt (:goals-against stats)))))))
+  (is (= (:goal-difference stats) (-  (:goals-for stats)  (:goals-against stats))))))
+
+(deftest correct-points 
+  (let [stats (:stats (first  (get-table "brasileirao-serie-b")))]
+  (is (= (:points stats) (+ (:drawed stats) (* 3 (:won stats)))))))
