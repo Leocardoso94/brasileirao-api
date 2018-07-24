@@ -4,7 +4,7 @@
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.util.response :refer [response]]
-            [brasileirao.core :refer [get-table]]))
+            [brasileirao.table :refer [get-table]]))
 
 (defn endpoints []
   (let [uri "https://campeonato-brasileiro-api.herokuapp.com"

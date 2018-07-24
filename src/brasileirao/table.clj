@@ -1,15 +1,6 @@
-(ns brasileirao.core
+(ns brasileirao.table
   (:require [net.cgrand.enlive-html :as html]
-            [org.httpkit.client :as http]))
-
-(defn get-dom
-  [url]
-  (html/html-snippet
-   (:body @(http/get url {:insecure? true}))))
-
-
-(defn get-content [html-tag]
-  (apply str (html-tag :content)))
+            [brasileirao.utils :refer [get-dom get-content]]))
 
 (defn get-team [table-row]
   (->
@@ -28,8 +19,7 @@
      :goals-for (get-stat-by-index 5)
      :goals-against (get-stat-by-index 6)
      :goal-difference (get-stat-by-index 7)
-     :percent-of-total-disputed-points (get-stat-by-index 8)
-     }))
+     :percent-of-total-disputed-points (get-stat-by-index 8)}))
 
 (defn get-table  [tournament]
   (let [dom (get-dom (str "https://globoesporte.globo.com/futebol/" tournament))
