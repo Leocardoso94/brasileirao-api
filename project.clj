@@ -13,6 +13,5 @@
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler brasileirao.handler/app}
   :jvm-opts ["--add-modules" "java.xml.bind"]
-
   :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                                   [ring/ring-mock "0.3.0"]]}})
