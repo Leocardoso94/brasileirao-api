@@ -5,7 +5,8 @@
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.util.response :refer [response]]
             [brasileirao.table :refer [get-table]]
-            [brasileirao.clubs :refer [get-clubs]]))
+            [brasileirao.clubs :refer [get-clubs]]
+            [brasileirao.rodada :refer [get-rodada]]))
 
 (defn endpoints []
   (let [uri "https://campeonato-brasileiro-api.herokuapp.com"
@@ -16,9 +17,10 @@
 
 
 (defroutes app-routes
-  (GET "/" [a]
+  (GET "/" []
     (response  (endpoints)))
   (GET "/clubs" [] (response (get-clubs)))
+  (GET "/rodadas" [] (get-rodada))
   (GET "/table/:tournament" [tournament] (get-table tournament))
   (route/not-found "Not Found"))
 
