@@ -1,12 +1,7 @@
 (ns brasileirao.table
   (:require [net.cgrand.enlive-html :as html]
-            [brasileirao.utils :refer [get-dom get-content]]))
-
-(defn get-team [table-row]
-  (->
-   (html/select table-row [:strong.tabela-times-time-nome])
-   first
-   get-content))
+            [brasileirao.utils :refer [get-dom get-content]]
+            [brasileirao.clubs :refer [get-team]]))
 
 (defn get-stats [table-row selector]
   (let [html-tag (html/select table-row selector)

@@ -4,18 +4,21 @@
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.util.response :refer [response]]
-            [brasileirao.table :refer [get-table]]))
+            [brasileirao.table :refer [get-table]]
+            [brasileirao.clubs :refer [get-clubs]]))
 
 (defn endpoints []
   (let [uri "https://campeonato-brasileiro-api.herokuapp.com"
         generate-uri #(str uri %)]
     {:brasileirao-serie-a (generate-uri "/table/brasileirao-serie-a")
-     :brasileirao-serie-b (generate-uri "/table/brasileirao-serie-b")}))
+     :brasileirao-serie-b (generate-uri "/table/brasileirao-serie-b")
+     :clubs (generate-uri "/clubs")}))
 
 
 (defroutes app-routes
   (GET "/" [a]
     (response  (endpoints)))
+  (GET "/clubs" [] (response (get-clubs)))
   (GET "/table/:tournament" [tournament] (get-table tournament))
   (route/not-found "Not Found"))
 
