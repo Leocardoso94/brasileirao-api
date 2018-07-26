@@ -11,10 +11,10 @@
      :won (get-stat-by-index 2)
      :drawed (get-stat-by-index 3)
      :lost (get-stat-by-index 4)
-     :goals-for (get-stat-by-index 5)
-     :goals-against (get-stat-by-index 6)
-     :goal-difference (get-stat-by-index 7)
-     :percent-of-total-disputed-points (get-stat-by-index 8)}))
+     :goals_for (get-stat-by-index 5)
+     :goals_against (get-stat-by-index 6)
+     :goal_difference (get-stat-by-index 7)
+     :percent_of_total_disputed-points (get-stat-by-index 8)}))
 
 (defn get-table  [tournament]
   (let [dom (get-dom (str "https://globoesporte.globo.com/futebol/" tournament))

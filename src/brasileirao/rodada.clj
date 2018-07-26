@@ -8,8 +8,8 @@
     (->> (take 2 arr)
          (map-indexed
           #(if (zero? %1)
-             {:mandante (get-content %2)}
-             {:visitante (get-content %2)}))
+             {:hometeam_name (get-content %2)}
+             {:awayteam_name (get-content %2)}))
          (reduce merge)
          (conj normalized-arr)
          (normalize-games (drop 2 arr)))))
@@ -22,8 +22,8 @@
   (get-content (first (html/select (:content dom) selector))))
 
 (defn normalize-placar [dom]
-  {:placar-mandante (get-placar dom [:span.placar-jogo-equipes-placar-mandante])
-   :placar-visitante (get-placar dom [:span.placar-jogo-equipes-placar-visitante])})
+  {:hometeam_score (get-placar dom [:span.placar-jogo-equipes-placar-mandante])
+   :awayteam_score (get-placar dom [:span.placar-jogo-equipes-placar-visitante])})
 
 (defn  get-mandante-placar [dom]
   (map normalize-placar
@@ -36,9 +36,9 @@
 
 (defn get-other-infos [dom]
   (map (fn [item]
-         {:local (get-content (first (html/select item [:span.placar-jogo-informacoes-local])))
+         {:place (get-content (first (html/select item [:span.placar-jogo-informacoes-local])))
           :date (subs  (get-content item) 4 14)
-          :horario (subs (get-content item) (- (count (get-content item)) 5) (count (get-content item)))})
+          :schedule (subs (get-content item) (- (count (get-content item)) 5) (count (get-content item)))})
        (html/select dom [:div.placar-jogo-informacoes])))
 
 (defn get-rodada  [rodada]
