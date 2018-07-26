@@ -1,8 +1,6 @@
 (ns brasileirao.rodada
   (:require [net.cgrand.enlive-html :as html]
             [brasileirao.utils :refer [get-dom get-content]]))
-(defn extract-data-from-rodada [html-tag]
-  (get-dom  rodada-url))
 
 (defn normalize-games [arr normalized-arr]
   (if (empty? arr)
