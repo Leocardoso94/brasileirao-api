@@ -6,6 +6,7 @@
                  [enlive "1.1.6"]
                  [http-kit "2.3.0"]
                  [compojure "1.5.1"]
+                 [camel-snake-kebab "0.4.0"]
                  [ring/ring-json "0.4.0"]
                  [ring-cors "0.1.12"]]
   :plugins [[lein-ring "0.9.7"]]

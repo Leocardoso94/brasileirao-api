@@ -17,5 +17,5 @@
 
 
 (defn get-clubs  []
-  {:serie_a (get-dom-from-tournament "brasileirao-serie-a")
-   :serie_b (get-dom-from-tournament "brasileirao-serie-b")})
+  {:serie-a (get-dom-from-tournament "brasileirao-serie-a")
+   :serie-b (get-dom-from-tournament "brasileirao-serie-b")})

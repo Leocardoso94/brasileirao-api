@@ -8,8 +8,8 @@
     (->> (take 2 arr)
          (map-indexed
           #(if (zero? %1)
-             {:hometeam_name (get-content %2)}
-             {:awayteam_name (get-content %2)}))
+             {:hometeam-name (get-content %2)}
+             {:awayteam-name (get-content %2)}))
          (reduce merge)
          (conj normalized-arr)
          (normalize-games (drop 2 arr)))))
@@ -22,8 +22,8 @@
   (get-content (first (html/select (:content dom) selector))))
 
 (defn normalize-placar [dom]
-  {:hometeam_score (get-placar dom [:span.placar-jogo-equipes-placar-mandante])
-   :awayteam_score (get-placar dom [:span.placar-jogo-equipes-placar-visitante])})
+  {:hometeam-score (get-placar dom [:span.placar-jogo-equipes-placar-mandante])
+   :awayteam-score (get-placar dom [:span.placar-jogo-equipes-placar-visitante])})
 
 (defn  get-mandante-placar [dom]
   (map normalize-placar
@@ -42,7 +42,7 @@
        (html/select dom [:div.placar-jogo-informacoes])))
 
 (defn get-rodada  [rodada]
-  (let [rodada-url (str "https://globoesporte.globo.com/servico/backstage/esportes_campeonato/esporte/futebol/modalidade/futebol_de_campo/categoria/profissional/campeonato/campeonato-brasileiro/edicao/campeonato-brasileiro-2018/fases/fase-unica-seriea-2018/rodada/" rodada "/jogos.html")
+  (let [rodada-url (str "https://globoesporte.globo.com/servico/backstage/esportes-campeonato/esporte/futebol/modalidade/futebol-de-campo/categoria/profissional/campeonato/campeonato-brasileiro/edicao/campeonato-brasileiro-2018/fases/fase-unica-seriea-2018/rodada/" rodada "/jogos.html")
 
         dom (get-dom  rodada-url)]
     (merge-properties (get-players dom)

@@ -1,12 +1,17 @@
 (ns brasileirao.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [camel-snake-kebab.core :refer :all]
+            [camel-snake-kebab.extras :refer [transform-keys]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.util.response :refer [response]]
             [brasileirao.table :refer [get-table]]
             [brasileirao.clubs :refer [get-clubs]]
             [brasileirao.rodada :refer [get-rodada]]))
+
+(defn response-camel-case [data]
+  (response  (transform-keys ->camelCaseString data)))
 
 (defn endpoints []
   (let [uri "https://campeonato-brasileiro-api.herokuapp.com"
@@ -19,10 +24,10 @@
 
 (defroutes app-routes
   (GET "/" []
-    (response  (endpoints)))
-  (GET "/clubs" [] (response (get-clubs)))
-  (GET "/round/:round" [round serie] (get-rodada round ))
-  (GET "/table/:tournament" [tournament] (get-table tournament))
+    (response-camel-case (endpoints)))
+  (GET "/clubs" [] (response-camel-case (get-clubs)))
+  (GET "/round/:round" [round serie] (response-camel-case (get-rodada round)))
+  (GET "/table/:tournament" [tournament] (response-camel-case  (get-table tournament)))
   (route/not-found "Not Found"))
 
 (def app
